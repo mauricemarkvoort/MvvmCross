@@ -11,7 +11,7 @@
     <AssemblyName>MvvmCross.Uwp</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -43,6 +43,8 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\MvxPagePresentationAttribute.cs" />
+    <Compile Include="Attributes\MvxSplitViewPresentationAttribute.cs" />
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Platform\MvxWindowsSetup.cs" />
     <Compile Include="..\..\..\AssemblyInfo.cs">
@@ -54,11 +56,10 @@
     <Compile Include="Views\IMvxWindowsViewModelLoader.cs" />
     <Compile Include="Views\IMvxWindowsViewModelRequestTranslator.cs" />
     <Compile Include="Views\IMvxWindowsViewPresenter.cs" />
-    <Compile Include="Views\MvxRegionAttribute.cs" />
+    <Compile Include="Attributes\MvxRegionPresentationAttribute.cs" />
     <Compile Include="Views\MvxWindowsExtensionMethods.cs" />
     <Compile Include="Views\MvxWindowsMainThreadDispatcher.cs" />
     <Compile Include="Views\MvxWindowsPage.cs" />
-    <Compile Include="Views\MvxWindowsMultiRegionViewPresenter.cs" />
     <Compile Include="Views\MvxWindowsViewDispatcher.cs" />
     <Compile Include="Views\MvxWindowsViewPresenter.cs" />
     <Compile Include="Views\MvxWindowsViewsContainer.cs" />
@@ -86,6 +87,7 @@
       <Name>MvvmCross.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

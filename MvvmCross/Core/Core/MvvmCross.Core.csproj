@@ -95,6 +95,7 @@
     <Compile Include="ViewModels\MvxBundle.cs" />
     <Compile Include="Platform\MvxSimplePropertyDictionaryExtensionMethods.cs" />
     <Compile Include="ViewModels\MvxViewModelExtensions.cs" />
+    <Compile Include="Views\MvxAttributeViewPresenter.cs" />
     <Compile Include="Views\MvxChildViewModelCache.cs" />
     <Compile Include="Views\MvxViewExtensionMethods.cs" />
     <Compile Include="ViewModels\IMvxApplication.cs" />
@@ -136,6 +137,22 @@
     <Compile Include="Views\MvxBasePresentationAttribute.cs" />
     <Compile Include="Views\IMvxOverridePresentationAttribute.cs" />
     <Compile Include="Views\MvxPresentationAttributeExtensions.cs" />
+    <Compile Include="Views\IMvxAttributeViewPresenter.cs" />
+    <Compile Include="Views\MvxPresentationAttributeAction.cs" />
+    <Compile Include="Platform\LogProviders\DisposableAction.cs" />
+    <Compile Include="Platform\LogProviders\EntLibLogProvider.cs" />
+    <Compile Include="Platform\LogProviders\Log4NetLogProvider.cs" />
+    <Compile Include="Platform\LogProviders\LogMessageFormatter.cs" />
+    <Compile Include="Platform\LogProviders\LoupeLogProvider.cs" />
+    <Compile Include="Platform\LogProviders\MvxBaseLogProvider.cs" />
+    <Compile Include="Platform\LogProviders\NLogLogProvider.cs" />
+    <Compile Include="Platform\LogProviders\SerilogLogProvider.cs" />
+    <Compile Include="Platform\LogProviders\TraceEventTypeValues.cs" />
+    <Compile Include="Platform\LogProviders\TypeExtensions.cs" />
+    <Compile Include="Platform\LogProviders\MvxLog.cs" />
+    <Compile Include="Platform\LogProviders\ConsoleLogProvider.cs" />
+    <Compile Include="ViewModels\MvxNotifyTask.cs" />
+    <Compile Include="ViewModels\PropertyChangedEventArgsCache.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
@@ -153,7 +170,5 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="Annotations\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

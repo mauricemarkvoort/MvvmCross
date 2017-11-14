@@ -10,12 +10,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Core.Navigation;
+using MvvmCross.Core.Platform.LogProviders;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.IoC;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Plugins;
 
@@ -30,6 +32,8 @@ namespace MvvmCross.Core.Platform
         protected abstract IMvxViewsContainer CreateViewsContainer();
 
         protected abstract IMvxViewDispatcher CreateViewDispatcher();
+
+        protected IMvxLog SetupLog { get; private set; }
 
         public virtual void Initialize()
         {
@@ -52,6 +56,7 @@ namespace MvvmCross.Core.Platform
                 throw new MvxException("Cannot start seconday - as state is currently {0}", State);
             }
             State = MvxSetupState.InitializingSecondary;
+            InitializeLoggingServices();
             MvxTrace.Trace("Setup: FirstChance start");
             InitializeFirstChance();
             MvxTrace.Trace("Setup: DebugServices start");
@@ -205,10 +210,47 @@ namespace MvvmCross.Core.Platform
             // do nothing by default
         }
 
+        protected virtual void InitializeLoggingServices()
+        {
+            var logProvider = CreateLogProvider();
+            if (logProvider != null)
+            {
+                Mvx.RegisterSingleton(logProvider);
+                SetupLog = logProvider.GetLogFor<MvxSetup>();
+                var globalLog = logProvider.GetLogFor<MvxLog>();
+                Mvx.RegisterSingleton(globalLog);
+            }
+        }
+
+        protected virtual MvxLogProviderType GetDefaultLogProviderType()
+            => MvxLogProviderType.Console;
+       
+        protected virtual IMvxLogProvider CreateLogProvider()
+        {
+            switch(GetDefaultLogProviderType())
+            {
+                case MvxLogProviderType.Console:
+                    return new ConsoleLogProvider();
+                case MvxLogProviderType.EntLib:
+                    return new EntLibLogProvider();
+                case MvxLogProviderType.Log4Net:
+                    return new Log4NetLogProvider();
+                case MvxLogProviderType.Loupe:
+                    return new LoupeLogProvider();
+                case MvxLogProviderType.NLog:
+                    return new NLogLogProvider();
+                case MvxLogProviderType.Serilog:
+                    return new SerilogLogProvider();
+                default:
+                    return null;
+            }
+        }
+
+        [Obsolete("IMvxTrace is replaced by IMvxLogProvider and IMvxLog")]
         protected virtual void InitializeDebugServices()
         {
             var debugTrace = CreateDebugTrace();
-            Mvx.RegisterSingleton<IMvxTrace>(debugTrace);
+            Mvx.RegisterSingleton(debugTrace);
             MvxTrace.Initialize();
         }
 

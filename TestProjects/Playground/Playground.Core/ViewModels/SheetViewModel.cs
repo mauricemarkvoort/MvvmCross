@@ -1,7 +1,6 @@
-﻿using System;
-using System.Windows.Input;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
+using System.Threading.Tasks;
 
 namespace Playground.Core.ViewModels
 {
@@ -13,9 +12,14 @@ namespace Playground.Core.ViewModels
         {
             _navigationService = navigationService;
 
-            CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
+            CloseCommand = new MvxAsyncCommand(CloseSheet);
         }
 
         public IMvxAsyncCommand CloseCommand { get; private set; }
+
+        private async Task CloseSheet()
+        {
+            await _navigationService.Close(this);
+        }
     }
 }
